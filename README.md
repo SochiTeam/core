@@ -1,2 +1,2 @@
-core
-====
+Souchi Game Engine
+==================
