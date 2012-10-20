@@ -12,20 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include build/defs.mk
-
-CC := g++
-SRC := $(wildcard src/*.cpp)
-OBJ := $(subst src/,obj/,$(SRC:.cpp=.o))
-OUT := out
-CFLAGS := -c -Wall
-LDFLAGS := -shared
-
-all: core
-
-core: $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ) -o $(OUT)/core.$(SO)
-
-obj/%.o: src/%.cpp
-	$(CC) $(CFLAGS) $< -o $@
-
+# Definitions
+ifneq (SystemRoot,)
+WIN32 := true
+SO := dll
+else
+SO := so
+endif
