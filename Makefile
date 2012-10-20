@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CC=g++
-SRC=$(wildcard src/*.cpp)
-OBJ=$(SRC:.cpp=.o)
-OUT=out
-CFLAGS=-c -Wall
-LDFLAGS=-shared
+CC := g++
+SRC := $(wildcard src/*.cpp)
+OBJ := $(subst src/,obj/,$(SRC:.cpp=.o))
+OUT := out
+CFLAGS := -c -Wall
+LDFLAGS := -shared
 
 
 # Definitions
@@ -30,9 +30,9 @@ endif
 
 all: core
 
-core: Main.o
-	$(CC) $(LDFLAGS) obj/Main.o -o out/core.$(SO)
+core: $(OBJ)
+	$(CC) $(LDFLAGS) $(OBJ) -o $(OUT)/core.$(SO)
 
-Main.o:
-	$(CC) $(CFLAGS) src/Main.cpp -o obj/Main.o
+obj/%.o: src/%.cpp
+	$(CC) $(CFLAGS) $< -o $@
 
