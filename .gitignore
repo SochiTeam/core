@@ -1,3 +1,5 @@
+out
+
 # Compiled Object files
 *.slo
 *.lo
@@ -5,6 +7,7 @@
 
 # Compiled Dynamic libraries
 *.so
+*.dll
 
 # Compiled Static libraries
 *.lai
