@@ -12,23 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-default: all
-
-include build/defs.mk
-
-#
-# CORE SHARED LIBRARY
-#
-include build/clear.mk
-
-TARGET_NAME := core
-TARGET_SRC := src/main.cpp \
-			  src/engine.cpp
-TARGET_TYPE := shared_library
-TARGET_BUILD := true
-
-include build/target.mk
-
-# Targets
-all: $(ALL_TARGETS)
-clean: $(addprefix clean-,$(ALL_TARGETS))
+TARGET_NAME :=
+TARGET_SRC :=
+TARGET_CC :=
+TARGET_CFLAGS :=
+TARGET_LDFLAGS :=
+TARGET_TYPE :=
+TARGET_BUILD :=

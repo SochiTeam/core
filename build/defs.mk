@@ -15,7 +15,30 @@
 # Definitions
 ifneq (SystemRoot,)
 WIN32 := true
+endif
+
+# Platform specific definitions
+ifeq ($(WIN32),true)
 SO := dll
+SLASH := \\
 else
 SO := so
+SLASH := /
+endif
+
+# Shortcut to $(SLASH), just use $(/)
+/ := $(SLASH)
+slashes = $(subst /,$(/),$(1))
+
+# Platform specific functions
+ifeq ($(WIN32),true)
+cp = copy $(call slashes,$(1)) $(call slashes,$(2))
+mv = move $(call slashes,$(1)) $(call slashes,$(2))
+rm = del $(call slashes,$(1))
+mkdir = md $(call slashes,$(1))
+else
+cp = cp $(call slashes,$(1)) $(call slashes,$(2))
+mv = mv $(call slashes,$(1)) $(call slashes,$(2))
+rm = rm $(call slashes,$(1))
+mkdir = mkdir -p $(call slashes,$(1))
 endif
