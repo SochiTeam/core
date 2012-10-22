@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-#include <stdio.h>
+#ifndef SOCHI_MAIN_H
+#define SOCHI_MAIN_H
 
-#include <main.h>
-
-int main() {
-    printf("Hello, world!");
-    return 0;
-}
+#endif

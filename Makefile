@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+CORE_ROOT := .
+
 default: all
 
 include build/defs.mk
@@ -22,6 +24,7 @@ include build/defs.mk
 include build/clear.mk
 
 TARGET_NAME := core
+TARGET_INCLUDE_PATH := include
 TARGET_SRC := src/main.cpp \
 			  src/engine.cpp
 TARGET_TYPE := shared_library

@@ -32,13 +32,18 @@ slashes = $(subst /,$(/),$(1))
 
 # Platform specific functions
 ifeq ($(WIN32),true)
-cp = copy $(call slashes,$(1)) $(call slashes,$(2))
-mv = move $(call slashes,$(1)) $(call slashes,$(2))
-rm = del $(call slashes,$(1))
-mkdir = md $(call slashes,$(1))
+cp = @copy $(call slashes,$(1)) $(call slashes,$(2))
+mv = @move $(call slashes,$(1)) $(call slashes,$(2))
+rm = @$(CORE_ROOT)\build\etc\rm.bat $(call slashes,$(1))
+mkdir = @$(CORE_ROOT)\build\etc\mkdir.bat $(call slashes,$(1))
 else
 cp = cp $(call slashes,$(1)) $(call slashes,$(2))
 mv = mv $(call slashes,$(1)) $(call slashes,$(2))
-rm = rm $(call slashes,$(1))
+rm = rm -rf $(call slashes,$(1))
 mkdir = mkdir -p $(call slashes,$(1))
 endif
+
+ifeq ($(CORE_ROOT),)
+$(error CORE_ROOT must be set!)
+endif
+CORE_ROOT := $(call slashes,$(CORE_ROOT))

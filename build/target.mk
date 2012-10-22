@@ -33,7 +33,7 @@ $(error TARGET_NAME must be set!)
 endif
 
 _TARGET_OBJ_DIR := obj/$(TARGET_NAME)
-_CFLAGS := -c $(TARGET_CFLAGS)
+_CFLAGS := -c $(TARGET_CFLAGS) $(addprefix -I,$(TARGET_INCLUDE_PATH))
 _LDFLAGS := $(TARGET_LDFLAGS)
 _SRC := $(TARGET_SRC)
 _OBJ := $(addprefix obj/$(TARGET_NAME)/,$(_SRC:.cpp=.o))
@@ -64,20 +64,24 @@ _OUT_FILE := $(TARGET_OUT)/$(TARGET_NAME)$(_EXT)
 define make_target
 
 $(_OUT_FILE): $(_OBJ)
-	$(TARGET_CC) $(_LDFLAGS) $(_OBJ) -o $(_OUT_FILE)
+	@echo $(TARGET_NAME): Linking target...
+	@$(TARGET_CC) $(_LDFLAGS) $(_OBJ) -o $(_OUT_FILE)
+	@echo $(TARGET_NAME): Build successful: $(_OUT_FILE)
 $(TARGET_NAME): $(_OUT_FILE)
 
 clean-$(_OUT_FILE):
-	$(call rm, $(_OUT_FILE))
-	$(call rm, $(_OBJ))
+	@$(call rm, $(_OUT_FILE))
+	@$(call rm, $(_TARGET_OBJ_DIR))
+	@echo $(TARGET_NAME): Cleaned.
 clean-$(TARGET_NAME): clean-$(_OUT_FILE)
 
 endef
 
 define make_obj_target
 $2: $1
-	$(shell $(call mkdir,$(dir $2)))
-	$(TARGET_CC) $(_CFLAGS) $1 -o $2
+	@echo $(TARGET_NAME): Target C++: $(1)
+	$(call mkdir,$(dir $2))
+	@$(TARGET_CC) $(_CFLAGS) $1 -o $2
 endef
 
 $(foreach src,$(_SRC), \
