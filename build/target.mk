@@ -25,7 +25,7 @@ TARGET_OUT = out
 endif
 
 ifeq ($(TARGET_BUILD),)
-TARGET_BUILD = optional
+TARGET_BUILD = true
 endif
 
 ifeq ($(TARGET_NAME),)
