@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CORE_ROOT := .
+ROOT := ..
 
 default: all
 
-include build/defs.mk
+include $(ROOT)/build/defs.mk
 
 #
 # CORE SHARED LIBRARY
 #
-include build/clear.mk
+include $(ROOT)/build/clear.mk
 
 TARGET_NAME := core
 TARGET_INCLUDE_PATH := include
@@ -30,7 +30,7 @@ TARGET_SRC := src/main.cpp \
 TARGET_TYPE := shared_library
 TARGET_BUILD := true
 
-include build/target.mk
+include $(ROOT)/build/target.mk
 
 # Targets
 all: $(ALL_TARGETS)
